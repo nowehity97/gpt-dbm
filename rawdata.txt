@@ -1,0 +1,111 @@
+{
+  "name": "gpt",
+  "permissions": "NONE",
+  "permissions2": "NONE",
+  "restriction": "1",
+  "_id": "HtkDP",
+  "actions": [
+    {
+      "channel": "0",
+      "varName": "",
+      "info": "1",
+      "storage": "1",
+      "varName2": "chid",
+      "name": "Store Channel Info"
+    },
+    {
+      "storage": "1",
+      "varName": "chid",
+      "comparison": "1",
+      "value": "'id-channel'",
+      "branch": {
+        "iftrue": "0",
+        "iffalse": "1"
+      },
+      "name": "Check Variable"
+    },
+    {
+      "member": "1",
+      "varName": "",
+      "info": "1",
+      "storage": "1",
+      "varName2": "username",
+      "name": "Store Member Info"
+    },
+    {
+      "message": "0",
+      "varName": "",
+      "info": "2",
+      "storage": "1",
+      "varName2": "Text",
+      "name": "Store Message Info"
+    },
+    {
+      "member": "1",
+      "varName": "",
+      "info": "2",
+      "storage": "1",
+      "varName2": "memname",
+      "name": "Store Member Info"
+    },
+    {
+      "member": "1",
+      "varName": "",
+      "info": "16",
+      "storage": "1",
+      "varName2": "memava",
+      "name": "Store Member Info"
+    },
+    {
+      "member": "1",
+      "varName": "",
+      "info": "3",
+      "storage": "1",
+      "varName2": "display",
+      "name": "Store Member Info"
+    },
+    {
+      "message": "0",
+      "varName": "",
+      "info": "2",
+      "storage": "1",
+      "varName2": "messtext",
+      "name": "Store Message Info"
+    },
+    {
+      "storage": "1",
+      "varName": "time",
+      "name": "Store Unix Timestamp"
+    },
+    {
+      "time": "${tempVars(\"time\")}",
+      "storage": "1",
+      "varName": "accuratetime",
+      "name": "Convert Timestamp to Date"
+    },
+    {
+      "apiKey": "api key https://github.com/settings/personal-access-tokens/new",
+      "userMessageVarName": "messtext",
+      "userMessageVarType": "1",
+      "responseVarName": "ai",
+      "responseVarType": "1",
+      "systemMessage": "\"You are AI-Bot, an AI assistant. The person your talking to is '${tempVars(\"display\")}'. Male sure to greet the user with your response, by saying something like .Use polish lang. You may give short reponses, unless required depending on what you asked for. You have Internet access as the current time in UNIX timestamp is ${tempVars(\"accuratetime\")}.",
+      "systemMessageType": null,
+      "storage": null,
+      "varName2": null,
+      "name": "AI GPT-4o Response"
+    },
+    {
+      "behavior": "0",
+      "interpretation": "0",
+      "code": "const Discord = require('discord.js');\nconst client = new Discord.Client({intents: [\"GUILDS\", \"GUILD_MESSAGES\"] });\nconst { MessageEmbed } = require('discord.js');\nconst { msg } = cache;\n\nconst clever = tempVars(\"ai\");\nconst fi =  tempVars(\"memava\");\nconst ft =tempVars(\"memname\") ;\nconst wia = tempVars(\"messtext\")\n\nconst embed = new MessageEmbed()\n.setColor('#2f3136')\n.setDescription(clever)\n.setFooter({ text: `` + ' ' + ft , iconURL: fi })\nmsg.reply({ embeds: [embed], allowedMentions: { repliedUser: false } })",
+      "storage": "0",
+      "varName": "",
+      "name": "Run Script"
+    }
+  ],
+  "comType": "3",
+  "parameters": [],
+  "description": "Ask a GPT 3.5 turbo model anything!",
+  "_timeRestriction": 5
+}
